@@ -20,6 +20,10 @@ if (NOT OpenCV_FOUND)
     message(WARNING "OpenCV 4 Support is experimental, use at your own risk!")
 endif()
 
+set(FBOW_INCLUDE_DIRS "/usr/local/include")
+set(FBOW_LIBS "/usr/local/lib/libfbow.so")
+find_package(fbow REQUIRED)
+
 ################################################################################
 # Sources
 ################################################################################
