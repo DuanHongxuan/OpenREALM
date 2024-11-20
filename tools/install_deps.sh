@@ -158,7 +158,9 @@ cd ~ && mkdir Pangolin && cd Pangolin
 git clone https://github.com/stevenlovegrove/Pangolin.git
 cd Pangolin
 mkdir build && cd build
-cmake ..
+cmake \
+    -DBUILD_PANGOLIN_VIDEO=OFF
+    ..
 make -j4
 sudo make install
 
