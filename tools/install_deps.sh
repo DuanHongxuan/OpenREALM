@@ -11,11 +11,11 @@ sudo apt-get install -y build-essential pkg-config git wget curl unzip
 OUTPUT=$(cmake --version)
 read CMAKE_VERSION_MAJOR CMAKE_VERSION_MINOR CMAKE_VERSION_PATCH <<< ${OUTPUT//[^0-9]/ }
 
-if [ $CMAKE_VERSION_MINOR < 15 ]; then
+if [[ $CMAKE_VERSION_MINOR < 15 ]]; then
 
   echo "CMake Version $CMAKE_VERSION_MAJOR.$CMAKE_VERSION_MINOR.$CMAKE_VERSION_PATCH is too old! Trying to download newer version "
 
-  if [ $ARCH == "aarch64" ]; then
+  if [[ $ARCH == "aarch64" ]]; then
     CMAKE_FILE="cmake-3.15.7"
 
     echo 'Architecture is aarch64. There is no cmake binaries available. Compiling from source is required. This takes a while.'
@@ -28,25 +28,25 @@ if [ $CMAKE_VERSION_MINOR < 15 ]; then
       esac
     done
 
-  elif [ $ARCH == "x86_64" ]; then
+  elif [[ $ARCH == "x86_64" ]]; then
     CMAKE_FILE="cmake-3.15.7-Linux-x86_64"
   fi
 
   cd ~ && mkdir ${CMAKE_FILE} && cd ${CMAKE_FILE}
 
   # Check if file already exists
-  if [ ! -e "${CMAKE_FILE}.tar.gz" ]; then
+  if [[ ! -e "${CMAKE_FILE}.tar.gz" ]]; then
     wget https://cmake.org/files/v3.15/${CMAKE_FILE}.tar.gz
   fi
 
   # Remove existing unpacked cmake folder
-  if [ -d "${CMAKE_FILE}" ]; then
+  if [[ -d "${CMAKE_FILE}" ]]; then
     rm -r ${CMAKE_FILE}
   fi
 
   tar xvzf ${CMAKE_FILE}.tar.gz
 
-  if [ $ARCH == "aarch64" ]; then
+  if [[ $ARCH == "aarch64" ]]; then
     cd ${CMAKE_FILE}
     ./configure
     sudo make install
